@@ -93,6 +93,7 @@ gulp.task('dist', function(cb) {
 
 gulp.task('watch', function() {
   gulp.watch(['./js/**/*', './css/**/*', './vendor/**/*', './img/**/*'], ['default']);
+  return rseq('default');
 });
 
 gulp.task('run', function (cb) {
