@@ -7,6 +7,8 @@ var shell    = require('gulp-shell');
 var chrome   = require('./vendor/chrome/manifest');
 var firefox  = require('./vendor/firefox/package');
 
+var package  = require('./package.json');
+
 function pipe(src, transforms, dest) {
   if (typeof transforms === 'string') {
     dest = transforms;
@@ -53,14 +55,16 @@ gulp.task('firefox', function() {
 });
 
 gulp.task('safari', function() {
+  var dest = './build/safari/' + package.name + '.safariextension';
+
   return es.merge(
-    pipe('./libs/**/*', './build/safari/likeastore.safariextension/libs'),
-    pipe('./img/**/*', './build/safari/likeastore.safariextension/img'),
-    pipe('./js/**/*', './build/safari/likeastore.safariextension/js'),
-    pipe('./css/**/*', './build/safari/likeastore.safariextension/css'),
-    pipe('./vendor/safari/browser.js', './build/safari/likeastore.safariextension/js'),
-    pipe('./vendor/safari/Info.plist', './build/safari/likeastore.safariextension'),
-    pipe('./vendor/safari/Settings.plist', './build/safari/likeastore.safariextension')
+    pipe('./libs/**/*', dest + '/libs'),
+    pipe('./img/**/*', dest + '/img'),
+    pipe('./js/**/*', dest + '/js'),
+    pipe('./css/**/*', dest + '/css'),
+    pipe('./vendor/safari/browser.js', dest + '/js'),
+    pipe('./vendor/safari/Info.plist', dest),
+    pipe('./vendor/safari/Settings.plist', dest)
   );
 });
 
