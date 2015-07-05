@@ -49,8 +49,8 @@ gulp.task('chrome', function() {
     pipe('./img/**/*', './build/chrome/img'),
     pipe('./js/**/*', './build/chrome/js'),
     pipe('./css/**/*', './build/chrome/css'),
-    pipe('./vendor/chrome/browser.js', [manifestTransform()], './build/chrome/js'),
-    pipe('./vendor/chrome/manifest.json', './build/chrome/')
+    pipe('./vendor/chrome/browser.js', './build/chrome/js'),
+    pipe('./vendor/chrome/manifest.json', [manifestTransform()], './build/chrome/')
   );
 });
 

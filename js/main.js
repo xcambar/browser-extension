@@ -1,3 +1,3 @@
 ;(function () {
-  console.log('Discover the APIs:', chrome);
+  console.log(app.browser.name, '- Discover the APIs', chrome);
 })();
