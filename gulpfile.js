@@ -112,10 +112,6 @@ gulp.task('run', function (cb) {
   return rseq('firefox', 'firefox-run', cb);
 });
 
-gulp.task('addons', shell.task([
-  'cp -R ./dist ../addons'
-]));
-
 gulp.task('default', function(cb) {
   return rseq('clean', ['chrome', 'firefox', 'safari'], cb);
 });
