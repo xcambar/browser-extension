@@ -7,7 +7,6 @@ var zip      = require('gulp-zip');
 var shell    = require('gulp-shell');
 var json     = require('gulp-json-editor');
 var chrome   = require('./vendor/chrome/manifest');
-var firefox  = require('./vendor/firefox/package');
 var package  = require('./package');
 
 var package  = require('./package.json');
@@ -34,13 +33,18 @@ gulp.task('clean', function() {
   return pipe('./build', [clean()]);
 });
 
+function  manifestTransform() {
+  return json({
+    version: package.version,
+    description: package.description,
+    author: package.author
+  });
+}
+
 gulp.task('chrome', function() {
-  function  manifestTransform() {
+  function  chromeTransform() {
     return json({
-      version: package.version,
       name: package.name.split('-').map(_.capitalize).join(' '),
-      description: package.description,
-      author: package.author,
       homepage_url: package.homepage
     });
   }
@@ -50,11 +54,23 @@ gulp.task('chrome', function() {
     pipe('./js/**/*', './build/chrome/js'),
     pipe('./css/**/*', './build/chrome/css'),
     pipe('./vendor/chrome/browser.js', './build/chrome/js'),
-    pipe('./vendor/chrome/manifest.json', [manifestTransform()], './build/chrome/')
+    pipe('./vendor/chrome/manifest.json', [manifestTransform(), chromeTransform()], './build/chrome/')
   );
 });
 
 gulp.task('firefox', function() {
+  function firefoxTransform() {
+    return json({
+      name: package.name,
+      fullName: package.name.split('-').map(_.capitalize).join(' '),
+      description: package.description,
+      author: package.author,
+      homepage_url: package.homepage,
+      license: package.license,
+      contributors: package.contributors,
+      url: package.homepage
+    });
+  }
   return es.merge(
     pipe('./libs/**/*', './build/firefox/data/libs'),
     pipe('./img/**/*', './build/firefox/data/img'),
@@ -62,7 +78,7 @@ gulp.task('firefox', function() {
     pipe('./css/**/*', './build/firefox/data/css'),
     pipe('./vendor/firefox/browser.js', './build/firefox/data/js'),
     pipe('./vendor/firefox/main.js', './build/firefox/data'),
-    pipe('./vendor/firefox/package.json', './build/firefox/')
+    pipe('./vendor/firefox/package.json', [manifestTransform(), firefoxTransform()], './build/firefox/')
   );
 });
 
@@ -88,7 +104,7 @@ gulp.task('chrome-dist', function () {
 
 gulp.task('firefox-dist', shell.task([
   'mkdir -p dist/firefox',
-  'cd ./build/firefox && ../../tools/addon-sdk-1.16/bin/cfx xpi --output-file=../../dist/firefox/firefox-extension-' + firefox.version + '.xpi > /dev/null',
+  'cd ./build/firefox && ../../tools/addon-sdk-1.16/bin/cfx xpi --output-file=../../dist/firefox/firefox-extension-' + package.version + '.xpi > /dev/null',
 ]));
 
 gulp.task('safari-dist', function () {
