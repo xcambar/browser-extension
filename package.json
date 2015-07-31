@@ -31,5 +31,8 @@
   "bugs": {
     "url": "https://github.com/xcambar/browser-extension/issues"
   },
-  "homepage": "https://github.com/xcambar/browser-extension"
+  "homepage": "https://github.com/xcambar/browser-extension",
+  "dependencies": {
+    "jpm": "^1.0.0"
+  }
 }
