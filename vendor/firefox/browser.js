@@ -2,10 +2,7 @@
   var app = window.app = window.app || {};
 
   app.browser = {
-    name: 'Firefox',
-
-    getUrl: function (url) {
-      return self.options.rootUrl + url;
-    }
+    name: 'Firefox'
+    // Add your Firefox-specific APIs here
   };
 })(window, this);

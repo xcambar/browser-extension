@@ -1,16 +1,13 @@
 {
-  "id": "",
-  "license": "",
-  "description": "",
-  "contributors": [],
   "author": "",
-  "url": "",
-  "name": "",
-  "version": "",
-  "lib": "data",
-  "main": "data/main",
-  "data": "data",
+  "contributors": [],
+  "description": "",
+  "homepage": "", 
   "icon": "",
-  "fullName": "",
-  "permissions": {}
+  "license": "",
+  "main": "data/main",
+  "name": "",
+  "permissions": {},
+  "title": "",
+  "version": ""
 }

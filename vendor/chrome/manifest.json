@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "My extension",
-  "description": "This is the right place for a description",
-  "version": "0.0.0",
+  "name": "",
+  "description": "",
+  "version": "",
   "author": "",
   "homepage_url": "",
   "permissions": [
@@ -12,7 +12,7 @@
     "run_at": "document_end",
     "css": [],
     "js": [
-      "js/browser.js",
+      "browser.js",
       "js/main.js"
     ],
     "matches": [
